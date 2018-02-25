@@ -22,29 +22,25 @@
 
 ## Configuration
 
-Configuration is done via an XML file. Here's an example:
+Configuration is done via a JSON file. Here's an example:
 
-```xml
-<xml>
-  <options>
-    <option>
-      <name>
-        Create Access Copy
-      </name>
-      <valid-input-extensions>
-        <ext>avi</ext>
-        <ext>mov</ext>
-      </valid-input-extensions>
-      <commands>
-        <command>
-          <input-options></input-options>
-          <output-options></output-options>
-          <output-extension>
-            mp4
-          </output-extension>
-        <command>
-      <commands>
-    </option>
-  </options>
-</xml>
+```json
+{
+  "options": [
+    {
+      "name": "Create Access Copy",
+      "valid-input-extensions": [
+        "avi",
+        "mov"
+      ],
+      "commands": [
+        {
+          "input-options": "",
+          "output-options": "-vcodec h264 -acodec aac -strict -2",
+          "output-extension": "mp4"
+        }
+      ]
+    }
+  ]
+}
 ```
