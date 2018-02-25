@@ -18,7 +18,7 @@ class Configuration:
             self.config_file_path = config_file_path
         else:
             self.config_file_path = path.join(
-                getcwd(), "configuration/configuration.json")
+                path.dirname(path.realpath(__file__)), "configuration/configuration.json")
         if not path.exists(self.config_file_path):
             raise Exception("Failed to find configuration file at: {0}.".format(
                 self.config_file_path))
