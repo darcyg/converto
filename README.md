@@ -35,9 +35,11 @@ First, you will want to configure Converto using the configuration.json file. On
 
 Converto also accepts some command-line parameters. Run `converto --help` to display which options are available.
 
-## Configuration
+# Configuration Examples
 
-Configuration is done via a JSON file. Here's an example:
+Configuration is done via a JSON file.
+
+## Simple Example
 
 ```json
 {
@@ -67,3 +69,34 @@ ffmpeg -i input.avi -vcodec h264 -acodec aac -strict -2 input.mp4
 ```
 
 Where "input.avi" is a file that the user chose to be operated on.
+
+## Command Chaining Example
+
+You can put multiple commands in an option, and they will be processed in serial. Intermediary files are used during the chaining, and are deleted when the command completes.
+
+```json
+{
+  "name": "Rescale Analog NTSC Source",
+  "valid-input-extensions": [
+    "mkv"
+  ],
+  "commands": [
+    {
+      "input-options": "",
+      "output-options": "-vf scale=720x480 -c:v ffv1 -level 3 -c:a copy",
+      "output-extension": "mkv"
+    },
+    {
+      "input-options": "",
+      "output-options": "-c:v libx264 -pix_fmt yuv420p -preset veryslow -crf 18 -c:a aac -ar 48000 -b:a 256k",
+      "output-extension": "mp4"
+    }
+  ]
+}
+```
+
+The above will run these ffmpeg commands, and produce a single .mp4:
+```shell
+ffmpeg -i {input_filename} -vf scale=720x480 -c:v ffv1 -level 3 -c:a copy {intermediary_filename}
+ffmpeg -i {intermediary_filename} -c:v libx264 -pix_fmt yuv420p -preset veryslow -crf 18 -c:a aac -ar 48000 -b:a 256k {output_filename}
+```
