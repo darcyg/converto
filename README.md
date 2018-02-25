@@ -29,6 +29,12 @@ Converto acts as a human-friendly wrapper around FFmpeg and also provides some p
 
 * To confirm installation succeded, run `converto`
 
+## Usage
+
+First, you will want to configure Converto using the configuration.json file. Once you've configured it to your liking, run `converto` from a terminal and follow on-screen prompts.
+
+Converto also accepts some command-line parameters. Run `converto --help` to display which options are available.
+
 ## Configuration
 
 Configuration is done via a JSON file. Here's an example:
