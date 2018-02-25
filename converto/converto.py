@@ -32,5 +32,5 @@ class Converto:
     def _generate_menu_options(self):
         menu_options = list()
         for i, opt in enumerate(self.config.options):
-            menu_options.append((opt.name, lambda: self._find_files_and_convert(i)))
+            menu_options.append((opt.name, lambda i=i: self._find_files_and_convert(i)))
         return menu_options
