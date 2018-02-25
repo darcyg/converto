@@ -1,0 +1,32 @@
+{
+  "options": [
+    {
+      "name": "Create Access Copy",
+      "valid-input-extensions": [
+        "avi",
+        "mov"
+      ],
+      "commands": [
+        {
+          "input-options": "",
+          "output-options": "",
+          "output-extension": "mp4"
+        }
+      ]
+    },
+    {
+      "name": "Create Preservation Copy",
+      "valid-input-extensions": [
+        "py",
+        "json"
+      ],
+      "commands": [
+        {
+          "input-options": "",
+          "output-options": "",
+          "output-extension": "mp4"
+        }
+      ]
+    }
+  ]
+}
