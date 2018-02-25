@@ -4,7 +4,7 @@
 
 Converto acts as a human-friendly wrapper around FFmpeg and also provides some productivity-enhancing features.
 
-## Features
+### Features
 
 * Batch Processing
 
@@ -13,13 +13,13 @@ Converto acts as a human-friendly wrapper around FFmpeg and also provides some p
 * Configurable
 
 
-## Requirements
+### Requirements
 
 * [Python 2.7](https://www.python.org/) must be installed.
 
 * [FFmpeg](https://ffmpeg.org/) must be on your path
 
-## Installation
+### Installation
 
 * Download this repo
 
@@ -29,17 +29,17 @@ Converto acts as a human-friendly wrapper around FFmpeg and also provides some p
 
 * To confirm installation succeded, run `converto`
 
-## Usage
+### Usage
 
 First, you will want to configure Converto using the configuration.json file. Once you've configured it to your liking, run `converto` from a terminal and follow on-screen prompts.
 
 Converto also accepts some command-line parameters. Run `converto --help` to display which options are available.
 
-# Configuration Examples
+## Configuration Examples
 
 Configuration is done via a JSON file.
 
-## Simple Example
+### Simple Example
 
 ```json
 {
@@ -70,7 +70,7 @@ ffmpeg -i input.avi -vcodec h264 -acodec aac -strict -2 input.mp4
 
 Where "input.avi" is a file that the user chose to be operated on.
 
-## Command Chaining Example
+### Command Chaining Example
 
 You can put multiple commands in an option, and they will be processed in serial. Intermediary files are used during the chaining, and are deleted when the command completes.
 
