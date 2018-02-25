@@ -25,7 +25,7 @@ class FileFinder:
             elif path.isdir(user_input):
                 self._find_files_from_directory(user_input)
             else:
-                print "The path entered is not valid. Retrying..."
+                print "The path entered: {0} is not valid.\nRetrying...".format(user_input)
                 continue
             if len(self.files) == 0:
                 print "Selection must contain at least one file of extension types: {0}".format(self._get_exts_list())
@@ -48,11 +48,14 @@ class FileFinder:
         self.satisfied_menu.set_options([
             ("Yes, continue", lambda: self._handle_user_satisfaction_choice(True)),
             ("No, let me try again.", lambda: self._handle_user_satisfaction_choice(False)),
+            ("Add another file.", lambda: self._handle_user_satisfaction_choice(True, add_another=True)),
         ])
         self.satisfied_menu.open()
 
-    def _handle_user_satisfaction_choice(self, satisfied):
+    def _handle_user_satisfaction_choice(self, satisfied, add_another=False):
         self.satisfied_menu.close()
+        if add_another:
+            return
         if not satisfied:
             self.files = list()
         self.user_satisfied = satisfied

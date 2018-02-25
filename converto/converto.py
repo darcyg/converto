@@ -35,14 +35,24 @@ class Converto:
 
                 output_filename = self._get_output_filename(f, i)
 
+                if self.chosen_option.multi_input:
+                    inputs = {}
+                    for f in self.files:
+                            inputs[f] = command.input_options
+                else:
+                    inputs = {input_file: command.input_options}
+                outputs = {output_filename: command.output_options}
+
                 ff = FFmpeg(
-                    inputs={input_file: command.input_options},
-                    outputs={output_filename: command.output_options}
+                    inputs=inputs,
+                    outputs=outputs
                 )
                 ff.run()
 
                 if previous_intermediary_exists:
                     remove(previous_intermediary_file)
+                elif self.chosen_option.multi_input:
+                    return
 
     def _ask_if_commands_look_right(self):
         command_list = ""

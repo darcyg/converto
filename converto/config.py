@@ -40,6 +40,7 @@ class Configuration:
             option = Option(
                 self._get_attribute(opt, "name"),
                 self._get_attribute(opt, "valid-input-extensions"),
+                self._get_attribute(opt, "multi-input"),
                 commands
             )
             options.append(option)
@@ -57,13 +58,14 @@ class Option:
     valid_input_exts = None
     commands = None
 
-    def __init__(self, name, valid_input_exts, commands):
+    def __init__(self, name, valid_input_exts, multi_input, commands):
         self.name = name
         self.valid_input_exts = valid_input_exts
+        self.multi_input = multi_input
         self.commands = commands
 
     def __repr__(self):
-        return "Name: {0} | Valid Input Exts: {1}\nCommands: {2}".format(self.name, self.valid_input_exts, self.commands)
+        return "Name: {0} | Valid Input Exts: {1}\nMulti Input: {2}\nCommands: {3}".format(self.name, self.valid_input_exts, self.multi_input, self.commands)
 
 
 class Command:
