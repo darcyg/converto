@@ -35,6 +35,30 @@ Configuration is done via a JSON file in {site_packages}/converto/configuration/
 
 You can find your {site-packages} location by running `pip show converto | grep "Location:"`.
 
+### Schema
+
+```python
+{
+  "options": [
+    {
+      "name": string, # The name to be displayed in the command-chooser list
+      "valid-input-extensions": [ # an array of accepted file extensions
+        string 
+      ],
+      "multi-input": boolean, # whether or not the files selected by the user will all be used in a single command
+      "commands": [ # an array of FFmpeg commands to run
+        {
+          "input-options": string, # the FFmpeg parameters BEFORE the -i flag
+          "output-options": string, # the FFmpeg parameters AFTER the -i flag and before the output file name
+          "output-extension": string, # the desired output file extension
+          "output-filename-format": string # optional output filename configuration. Requires {input_filename} and {extension} to be used somewhere in the string
+        }
+      ]
+    }
+  ]
+}
+```
+
 ### Simple Example
 
 ```json
