@@ -20,7 +20,8 @@ class Configuration:
             self.config_file_path = path.join(
                 getcwd(), "configuration/configuration.json")
         if not path.exists(self.config_file_path):
-            raise Exception("Failed to find configuration file at: {0}.".format(self.config_file_path))
+            raise Exception("Failed to find configuration file at: {0}.".format(
+                self.config_file_path))
 
     def _parse_options(self):
         options = list()
@@ -31,17 +32,24 @@ class Configuration:
             for com in opt["commands"]:
                 commands.append(
                     Command(
-                        com["input-options"],
-                        com["output-options"],
-                        com["output-extension"]
+                        self._get_attribute(com, "input-options"),
+                        self._get_attribute(com, "output-options"),
+                        self._get_attribute(com, "output-extension"),
+                        self._get_attribute(com, "output-filename-format")
                     ))
             option = Option(
-                opt["name"],
-                opt["valid-input-extensions"],
+                self._get_attribute(opt, "name"),
+                self._get_attribute(opt, "valid-input-extensions"),
                 commands
             )
             options.append(option)
         self.options = options
+
+    def _get_attribute(self, elem, attribute_name):
+        try:
+            return elem[attribute_name]
+        except:
+            return None
 
 
 class Option:
@@ -57,15 +65,18 @@ class Option:
     def __repr__(self):
         return "Name: {0} | Valid Input Exts: {1}\nCommands: {2}".format(self.name, self.valid_input_exts, self.commands)
 
+
 class Command:
     input_options = None
     output_options = None
     output_extension = None
+    output_filename_format = None
 
-    def __init__(self, input_options, output_options, output_extension):
+    def __init__(self, input_options, output_options, output_extension, output_filename_format):
         self.input_options = input_options
         self.output_options = output_options
         self.output_extension = output_extension
+        self.output_filename_format = output_filename_format
 
     def __repr__(self):
-        return "Input Opts: {0} | Output Opts: {1} | Output Ext: {2}\n".format(self.input_options, self.output_options, self.output_extension)
+        return "Input Opts: {0} | Output Opts: {1} | Output Ext: {2} | Output Filename Format: {3}\n".format(self.input_options, self.output_options, self.output_extension, self.output_filename_format)

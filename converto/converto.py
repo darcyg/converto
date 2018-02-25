@@ -3,6 +3,7 @@ from menu import Menu
 from ffmpy import FFmpeg
 from os import path, remove
 
+
 class Converto:
     menu_options = list()
     files = list()
@@ -24,7 +25,8 @@ class Converto:
                 is_intermediary = self._is_intermediary(i)
                 previous_intermediary_exists = False
 
-                previous_intermediary_file = self._get_output_filename(f, (i - 1))
+                previous_intermediary_file = self._get_output_filename(
+                    f, (i - 1))
                 if path.isfile(previous_intermediary_file):
                     previous_intermediary_exists = True
 
@@ -32,7 +34,7 @@ class Converto:
                     input_file = previous_intermediary_file
 
                 output_filename = self._get_output_filename(f, i)
-                
+
                 ff = FFmpeg(
                     inputs={input_file: command.input_options},
                     outputs={output_filename: command.output_options}
@@ -93,9 +95,14 @@ class Converto:
     def _get_output_filename(self, filename, command_index):
         command = self.chosen_option.commands[command_index]
         if self._is_intermediary(command_index):
-            output_filename =  "{0}_INTERMEDIARY_{1}.{2}".format(filename[:-4], command_index, command.output_extension)
+            output_filename = "{0}_INTERMEDIARY_{1}.{2}".format(
+                filename[:-4], command_index, command.output_extension)
+        elif command.output_filename_format:
+            output_filename = command.output_filename_format.format(
+                input_filename=filename, extension=command.output_extension)
         else:
-            output_filename = "{0}.{1}".format(filename[:-4], command.output_extension)
+            output_filename = "{0}.{1}".format(
+                filename[:-4], command.output_extension)
         return output_filename
 
     def _is_intermediary(self, index):
