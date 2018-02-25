@@ -21,13 +21,7 @@ Converto acts as a human-friendly wrapper around FFmpeg and also provides some p
 
 ### Installation
 
-* Download this repo
-
-* Unzip
-
-* run `python setup.py install`
-
-* To confirm installation succeded, run `converto`
+* `pip install converto`
 
 ### Usage
 
@@ -35,9 +29,11 @@ First, you will want to configure Converto using the configuration.json file. On
 
 Converto also accepts some command-line parameters. Run `converto --help` to display which options are available.
 
-## Configuration Examples
+## Configuration
 
-Configuration is done via a JSON file.
+Configuration is done via a JSON file in {site_packages}/converto/configuration/configuration.json
+
+You can find your {site-packages} location by running `pip show converto | grep "Location:"`.
 
 ### Simple Example
 
