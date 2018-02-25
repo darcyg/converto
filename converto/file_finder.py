@@ -19,6 +19,7 @@ class FileFinder:
                 _user_input = None
             else:
                 user_input = self._ask_user_for_files()
+            user_input = self._clean_user_input(user_input)
             if path.isfile(user_input):
                 if self._file_is_right_extension(user_input):
                     self.files.append(user_input)
@@ -31,6 +32,9 @@ class FileFinder:
                 print "Selection must contain at least one file of extension types: {0}".format(self._get_exts_list())
                 continue
             self._ask_if_user_is_satisfied_with_files()
+
+    def _clean_user_input(self, user_input):
+        return user_input.replace(r"\ ", " ")
 
     def _ask_user_for_files(self):
         print "Valid input types: {0}\n".format(self._get_exts_list())
