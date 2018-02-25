@@ -9,7 +9,7 @@
       "commands": [
         {
           "input-options": "",
-          "output-options": "",
+          "output-options": "-vcodec h264 -acodec mp2",
           "output-extension": "mp4"
         }
       ]
