@@ -25,7 +25,7 @@ class Converto:
     def _find_files_and_convert(self, option_index):
         self.main_menu.close()
         self.chosen_option = self.config.options[option_index]
-        print "You chose {0}".format(self.chosen_option.name)
+        print "You chose \"{0}\"\n".format(self.chosen_option.name)
         file_finder = FileFinder(self.chosen_option, self.user_input)
         self._convert(file_finder.files)
 
