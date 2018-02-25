@@ -1,4 +1,17 @@
-# converto
+# Converto
+
+## Summary
+
+Converto acts as a human-friendly wrapper around FFmpeg and also provides some productivity-enhancing features.
+
+## Features
+
+* Batch Processing
+
+* FFmpeg command-chaining
+
+* Configurable
+
 
 ## Requirements
 
@@ -40,3 +53,11 @@ Configuration is done via a JSON file. Here's an example:
   ]
 }
 ```
+
+The above configuration get interpreted as this ffmpeg command:
+
+```shell
+ffmpeg -i input.avi -vcodec h264 -acodec aac -strict -2 input.mp4
+```
+
+Where "input.avi" is a file that the user chose to be operated on.
