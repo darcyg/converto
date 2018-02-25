@@ -10,7 +10,7 @@ class FileFinder:
 
     def __init__(self, option, user_input=None):
         self.option = option
-        self.files = self._get_user_input(user_input)
+        self._get_user_input(user_input)
 
     def _get_user_input(self, _user_input):
         while not self.user_satisfied:
