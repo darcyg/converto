@@ -4,11 +4,7 @@
 
 * [Python 2.7](https://www.python.org/) must be installed.
 
-* ffmpeg must be on your path. open a terminal and type `ffmpeg`. If that brought up a bunch of options, you can continue to the "Installation" section.
-
-  **OSX**: `brew install ffmpeg`
-
-  **Windows**: download ffmpeg and place installation directory in your PATH environment variable
+* [FFmpeg](https://ffmpeg.org/) must be on your path
 
 ## Installation
 
