@@ -33,6 +33,7 @@ class FileFinder:
             self._ask_if_user_is_satisfied_with_files()
 
     def _ask_user_for_files(self):
+        print "Valid input types: {0}".format(self._get_exts_list())
         return raw_input("Enter the path of your file or directory of files: ").strip()
 
     def _find_files_from_directory(self, user_input):
