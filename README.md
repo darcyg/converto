@@ -1,4 +1,6 @@
-# Converto [![Build Status](https://travis-ci.org/erikmhauck/converto.svg?branch=master)](https://travis-ci.org/erikmhauck/converto)
+# Converto 
+[![Build Status](https://travis-ci.org/erikmhauck/converto.svg?branch=master)](https://travis-ci.org/erikmhauck/converto)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 ## Summary
 
