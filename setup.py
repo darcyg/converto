@@ -1,4 +1,5 @@
 from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='Converto',
@@ -16,6 +17,8 @@ setup(
         'ffmpy',
         'future'
     ],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest', 'coveralls'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: End Users/Desktop',
