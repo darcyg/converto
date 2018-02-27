@@ -36,7 +36,7 @@ setup(
         'Source': 'https://github.com/erikmhauck/converto',
         'Tracker': 'https://github.com/erikmhauck/converto/issues',
     },
-    python_requires='>=2.7, <4',
+    python_requires='>=2.6, <4',
     package_data={
         'converto': ['configuration/configuration.json'],
     },
