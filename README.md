@@ -2,6 +2,10 @@
 [![Build Status](https://travis-ci.org/erikmhauck/converto.svg?branch=master)](https://travis-ci.org/erikmhauck/converto)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Coverage Status](https://coveralls.io/repos/github/erikmhauck/converto/badge.svg)](https://coveralls.io/github/erikmhauck/converto)
+
+[![Python Versions](https://img.shields.io/pypi/pyversions/Converto.svg)](https://pypi.python.org/pypi/Converto)
+[![PyPI Version](https://img.shields.io/pypi/v/Converto.svg)](https://pypi.python.org/pypi/Converto)
+
 ## Summary
 
 Converto acts as a human-friendly wrapper around FFmpeg and also provides some productivity-enhancing features.
