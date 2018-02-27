@@ -21,7 +21,7 @@ Converto acts as a human-friendly wrapper around FFmpeg and also provides some p
 
 ### Requirements
 
-* [Python 2.7](https://www.python.org/) must be installed.
+* [Python](https://www.python.org/) must be installed.
 
 * [FFmpeg](https://ffmpeg.org/) must be on your path
 
