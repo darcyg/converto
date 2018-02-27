@@ -13,7 +13,8 @@ setup(
     url='https://github.com/erikmhauck/converto',
     install_requires=[
         'menu',
-        'ffmpy'
+        'ffmpy',
+        'future'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
