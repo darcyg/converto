@@ -1,3 +1,4 @@
+from __future__ import print_function
 from file_finder import FileFinder
 from menu import Menu
 from ffmpy import FFmpeg
@@ -86,7 +87,7 @@ class Converto:
     def _find_files_and_convert(self, option_index):
         self.main_menu.close()
         self.chosen_option = self.config.options[option_index]
-        print "You chose \"{0}\"\n".format(self.chosen_option.name)
+        print("You chose \"{0}\"\n".format(self.chosen_option.name))
         file_finder = FileFinder(self.chosen_option, self.user_input)
         file_finder.get_user_input()
         self.files = file_finder.files

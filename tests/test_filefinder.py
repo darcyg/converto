@@ -1,3 +1,4 @@
+from __future__ import print_function
 from converto.file_finder import FileFinder
 from converto.config import Configuration
 from converto.converto import Converto
@@ -38,7 +39,7 @@ def test_get_file_list():
 
     # act
     file_list_string = file_finder._get_file_list()
-    print file_list_string
+    print(file_list_string)
     # assert
     assert len(file_list_string.split('\n')) == 2
 

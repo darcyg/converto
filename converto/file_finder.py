@@ -1,5 +1,7 @@
+from __future__ import print_function
 from os import path, walk
 from menu import Menu
+
 
 class FileFinder:
     files = list()
@@ -27,10 +29,10 @@ class FileFinder:
             elif path.isdir(user_input):
                 self.files = self._find_files_from_directory(user_input)
             else:
-                print "The path entered: {0} is not valid.\nRetrying...".format(user_input)
+                print("The path entered: {0} is not valid.\nRetrying...".format(user_input))
                 continue
             if len(self.files) == 0:
-                print "Selection must contain at least one file of extension types: {0}".format(self._get_exts_list())
+                print("Selection must contain at least one file of extension types: {0}".format(self._get_exts_list()))
                 continue
             self._ask_if_user_is_satisfied_with_files()
 
@@ -38,7 +40,7 @@ class FileFinder:
         return user_input.replace(r"\ ", " ")
 
     def _ask_user_for_files(self):
-        print "Valid input types: {0}\n".format(self._get_exts_list())
+        print("Valid input types: {0}\n".format(self._get_exts_list()))
         return raw_input("Enter the path of your file or directory of files: ").strip()
 
     def _find_files_from_directory(self, user_input):
