@@ -7,16 +7,17 @@ class FileFinder:
     option = None
     user_satisfied = False
     satisfied_menu = None
+    _user_input = None
 
     def __init__(self, option, user_input=None):
         self.option = option
-        self._get_user_input(user_input)
+        self._user_input = user_input
 
-    def _get_user_input(self, _user_input):
+    def get_user_input(self):
         while not self.user_satisfied:
-            if _user_input:
-                user_input = _user_input
-                _user_input = None
+            if self._user_input:
+                user_input = self._user_input
+                self._user_input = None
             else:
                 user_input = self._ask_user_for_files()
             user_input = self._clean_user_input(user_input)
@@ -24,7 +25,7 @@ class FileFinder:
                 if self._file_is_right_extension(user_input):
                     self.files.append(user_input)
             elif path.isdir(user_input):
-                self._find_files_from_directory(user_input)
+                self.files = self._find_files_from_directory(user_input)
             else:
                 print "The path entered: {0} is not valid.\nRetrying...".format(user_input)
                 continue
@@ -41,10 +42,12 @@ class FileFinder:
         return raw_input("Enter the path of your file or directory of files: ").strip()
 
     def _find_files_from_directory(self, user_input):
+        found_files = list()
         for root, dirs, files in walk(user_input):
             for f in files:
                 if self._file_is_right_extension(f):
-                    self.files.append(path.join(root,f))
+                    found_files.append(path.join(root,f))
+        return found_files
 
     def _ask_if_user_is_satisfied_with_files(self):
         satisfied = True

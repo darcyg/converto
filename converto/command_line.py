@@ -11,7 +11,9 @@ def main():
     setup_logging(args.debug)
     configuration = Configuration(args.config)
     logging.debug(configuration)
-    c = Converto(configuration, args.input)
+    converto = Converto(configuration, args.input)
+    converto.show_main_menu()
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
