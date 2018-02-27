@@ -1,6 +1,6 @@
 from __future__ import print_function
 from .file_finder import FileFinder
-from .menu import Menu
+from menu import Menu
 from ffmpy import FFmpeg
 from os import path, remove
 

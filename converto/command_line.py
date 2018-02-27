@@ -1,6 +1,6 @@
-from config import Configuration
-from file_finder import FileFinder
-from converto import Converto
+from .config import Configuration
+from .file_finder import FileFinder
+from .converto import Converto
 
 import logging
 import argparse
