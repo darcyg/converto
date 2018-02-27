@@ -1,4 +1,5 @@
 from __future__ import print_function
+from builtins import input
 from os import path, walk
 from menu import Menu
 
@@ -41,7 +42,7 @@ class FileFinder:
 
     def _ask_user_for_files(self):
         print("Valid input types: {0}\n".format(self._get_exts_list()))
-        return raw_input("Enter the path of your file or directory of files: ").strip()
+        return input("Enter the path of your file or directory of files: ").strip()
 
     def _find_files_from_directory(self, user_input):
         found_files = list()

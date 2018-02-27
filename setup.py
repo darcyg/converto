@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='Converto',
-    version='0.1.9',
+    version='1.0.1',
     packages=['converto'],
     license='MIT',
     entry_points={
