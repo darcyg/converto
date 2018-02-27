@@ -21,7 +21,6 @@ setup(
         'Intended Audience :: End Users/Desktop',
         'Topic :: Multimedia',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
@@ -36,7 +35,7 @@ setup(
         'Source': 'https://github.com/erikmhauck/converto',
         'Tracker': 'https://github.com/erikmhauck/converto/issues',
     },
-    python_requires='>=2.6, <4',
+    python_requires='>=2.7, <4',
     package_data={
         'converto': ['configuration/configuration.json'],
     },
