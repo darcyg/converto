@@ -20,7 +20,7 @@ setup(
     setup_requires=['pytest-runner'],
     tests_require=['pytest', 'coveralls'],
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: End Users/Desktop',
         'Topic :: Multimedia',
         'License :: OSI Approved :: MIT License',
