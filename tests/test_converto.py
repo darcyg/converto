@@ -72,8 +72,7 @@ def test_is_intermediary():
 def test_convert_basic():
     # arrange
     clean_up_all_files()
-    output_file = path.join(path.dirname(
-        path.realpath(__file__)), "sample_files", "flame.mp4")
+    output_file = get_full_output_file_path("flame.mp4")
     conv = build_converto_action(0)
     # act
     conv._convert()
@@ -85,12 +84,16 @@ def test_convert_basic():
 def test_convert_with_multi_input():
     # arrange
     clean_up_all_files()
-    output_file = get_full_output_file_path("flame2.mp4")
+    output_file_1 = get_full_output_file_path("flame.mp4")
+    output_file_2 = get_full_output_file_path("flame2.mp4")
     conv = build_converto_action(1)
     # act
     conv._convert()
     # assert
-    assert path.exists(output_file)
+    try:
+        assert path.exists(output_file_1)
+    except: # since we can't control how the OS discovers files, check both names
+        assert path.exists(output_file_2)
     clean_up_all_files()
 
 
