@@ -68,8 +68,9 @@ class Converto:
             output_filename = "{0}_INTERMEDIARY_{1}.{2}".format(
                 filename[:-4], command_index, command.output_extension)
         elif command.output_filename_format:
+            fn, ext = path.splitext(filename)
             output_filename = command.output_filename_format.format(
-                input_filename=filename, extension=command.output_extension)
+                input_filename=fn, extension=command.output_extension)
         else:
             output_filename = "{0}.{1}".format(
                 filename[:-4], command.output_extension)

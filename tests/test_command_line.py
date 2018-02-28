@@ -14,5 +14,6 @@ def test_parse_args():
 def test_setup_logging():
     # act
     setup_logging(False)
+    setup_logging(True)
     # assert
     assert True

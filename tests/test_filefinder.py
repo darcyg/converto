@@ -25,7 +25,7 @@ def test_find_files_from_directory():
     # act
     found_files = file_finder._find_files_from_directory(test_path)
     # assert
-    assert len(found_files) == 1
+    assert len(found_files) == 2
 
 def test_get_file_list():
     # arrange
@@ -34,9 +34,8 @@ def test_get_file_list():
     file_finder.files = file_finder._find_files_from_directory(test_path)
     # act
     file_list_string = file_finder._get_file_list()
-    print(file_list_string)
     # assert
-    assert len(file_list_string.split('\n')) == 2
+    assert len(file_list_string.split('\n')) == 3
 
 def test_get_exts_list():
     # arrange
