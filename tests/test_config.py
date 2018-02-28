@@ -9,6 +9,7 @@ def test_find_config():
     # assert
     assert config.config_file_path != None
 
+
 def test_repr():
     # arrange
     config_file_path = None

@@ -10,6 +10,7 @@ def test_parse_args():
     assert args.debug == False
     assert args.input == None
 
+
 def test_setup_logging():
     # act
     setup_logging(False)

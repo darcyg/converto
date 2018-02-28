@@ -38,7 +38,8 @@ class Converto:
                     return
 
     def _get_file_to_operate_on(self, input_file, i):
-        previous_intermediary_file = self._get_output_filename(input_file, (i - 1))
+        previous_intermediary_file = self._get_output_filename(
+            input_file, (i - 1))
         if path.isfile(previous_intermediary_file):
             return previous_intermediary_file, True
         else:

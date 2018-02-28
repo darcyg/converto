@@ -17,11 +17,15 @@ def main():
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--debug", action='store_true', help="Show debugging information")
-    parser.add_argument("-c", "--config", default=None, help="Specify Configuration File Path")
-    parser.add_argument("-i", "--input", default=None, help="specify the file, or the directory of files, to operate on")
+    parser.add_argument("-d", "--debug", action='store_true',
+                        help="Show debugging information")
+    parser.add_argument("-c", "--config", default=None,
+                        help="Specify Configuration File Path")
+    parser.add_argument("-i", "--input", default=None,
+                        help="specify the file, or the directory of files, to operate on")
     args = parser.parse_args()
     return args
+
 
 def setup_logging(debug):
     if debug:
