@@ -42,15 +42,15 @@ def test_is_intermediary():
 
 # disabled until I figure out a way to deal with ffmpeg binary dependency on travis
 
-# def test_convert():
-#     # arrange
-#     test_path = path.join(path.dirname(path.realpath(__file__)), "sample_files")
-#     output_file = path.join(path.dirname(path.realpath(__file__)), "sample_files", "flame.mp4")
-#     clean_up(output_file)
-#     conv = build_converto()
-#     file_finder = FileFinder(conv.config.options[0], "test")
-#     conv.files = file_finder._find_files_from_directory(test_path)    
-#     # act
-#     conv._convert()
-#     # assert
-#     assert path.exists(output_file)
+def test_convert():
+    # arrange
+    test_path = path.join(path.dirname(path.realpath(__file__)), "sample_files")
+    output_file = path.join(path.dirname(path.realpath(__file__)), "sample_files", "flame.mp4")
+    clean_up(output_file)
+    conv = build_converto()
+    file_finder = FileFinder(conv.config.options[0], "test")
+    conv.files = file_finder._find_files_from_directory(test_path)    
+    # act
+    conv._convert()
+    # assert
+    assert path.exists(output_file)
