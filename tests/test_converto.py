@@ -39,9 +39,6 @@ def test_is_intermediary():
     # assert
     assert is_intermediary == False
 
-
-# disabled until I figure out a way to deal with ffmpeg binary dependency on travis
-
 def test_convert():
     # arrange
     test_path = path.join(path.dirname(path.realpath(__file__)), "sample_files")
