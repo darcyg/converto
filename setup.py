@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='Converto',
-    version='1.0.1',
+    version='1.1.0',
     packages=['converto'],
     license='MIT',
     entry_points={
