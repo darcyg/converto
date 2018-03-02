@@ -2,7 +2,15 @@ from __future__ import print_function
 from .file_finder import FileFinder
 from menu import Menu
 from ffmpy import FFmpeg
-from os import path, remove
+from os import path, remove, rename
+import re
+
+class Command:
+    def __init__(self, ffmpeg_command, input_file, output_file, is_intermediate):
+        self.ffmpeg_command = ffmpeg_command
+        self.input_file = input_file
+        self.output_file = output_file
+        self.is_intermediate = is_intermediate
 
 
 class Converto:
@@ -27,25 +35,26 @@ class Converto:
 
     def find_files_to_operate_on(self):
         file_finder = FileFinder(
-            self.chosen_option, self._generate_command_list(), self.user_input)
-        self.files = file_finder.get_user_input()
+            self.chosen_option, self.user_input)
+        while not file_finder.user_satisfied:
+            self.files = file_finder.get_user_input()
+            self.command_list = self._generate_command_list()
+            file_finder._ask_if_user_is_satisfied_with_files(self.command_list)
 
     def convert(self):
-        for f in self.files:
-            for i, command in enumerate(self.chosen_option.commands):
-                input_file, was_intermediate = self._get_file_to_operate_on(
-                    f, i)
-                ff = self._build_ffmpeg_command(input_file, i)
-                ff.run()
-                if was_intermediate:
-                    remove(previous_intermediary_file)
-                if self.chosen_option.multi_input:
-                    return
+        for command in self.command_list:
+            command.ffmpeg_command.run()
+            if command.is_intermediate:
+                remove(command.input_file)
+                new_output_filename = re.sub("-_-_INTERMEDIARY_[0-9]*_-_-","",command.output_file)
+                rename(command.output_file, new_output_filename)
+            if self.chosen_option.multi_input:
+                return
 
     def _get_file_to_operate_on(self, input_file, i):
         previous_intermediary_file = self._get_output_filename(
             input_file, (i - 1))
-        if path.isfile(previous_intermediary_file):
+        if i > 0:
             return previous_intermediary_file, True
         else:
             return input_file, False
@@ -65,12 +74,12 @@ class Converto:
             inputs=inputs,
             outputs=outputs
         )
-        return ff
+        return ff, output_filename
 
     def _get_output_filename(self, filename, command_index):
         command = self.chosen_option.commands[command_index]
         if self._is_intermediary(command_index):
-            output_filename = "{0}_INTERMEDIARY_{1}.{2}".format(
+            output_filename = "{0}-_-_INTERMEDIARY_{1}_-_-.{2}".format(
                 filename[:-4], command_index, command.output_extension)
         elif command.output_filename_format:
             fn, ext = path.splitext(filename)
@@ -96,11 +105,12 @@ class Converto:
         self.chosen_option = self.config.options[option_index]
 
     def _generate_command_list(self):
-        command_list = ""
-        for command in self.chosen_option.commands:
-            ff = FFmpeg(
-                inputs={"{input_filename}": command.input_options},
-                outputs={"{output_filename}": command.output_options}
-            )
-            command_list = command_list + ff.cmd + "\n"
+        command_list = list()
+        for f in self.files:
+            for i, command in enumerate(self.chosen_option.commands):
+                input_file, was_intermediate = self._get_file_to_operate_on(
+                    f, i)
+                ff, output_file = self._build_ffmpeg_command(input_file, i)
+                command_list.append(
+                    Command(ff, input_file, output_file, was_intermediate))
         return command_list

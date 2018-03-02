@@ -52,3 +52,14 @@ def test_file_is_right_extension():
     is_valid = file_finder._file_is_right_extension("test.avi")
     # assert
     assert is_valid
+
+def test_build_menu_title():
+    # arrange
+    configuration = Configuration()
+    conv = Converto(configuration, "test")
+    command_list = conv._generate_command_list()
+    file_finder = FileFinder(conv.config.options[0], "test")
+    # act
+    menu_title = file_finder._build_menu_title(command_list)
+    # assert
+    assert menu_title is not None

@@ -4,7 +4,14 @@ from converto.file_finder import FileFinder
 from os import path, remove
 
 
-output_files = ['flame.mp4', 'flame2.mp4', 'flame_ac.mp4', 'flame2_ac.mp4']
+output_files = [
+    'flame.mp4',
+    'flame2.mp4',
+    'flame_ac.mp4',
+    'flame2_ac.mp4',
+    'flame_roundtrip.avi',
+    'flame2_roundtrip.avi'
+]
 
 
 def build_converto(option_number):
@@ -21,6 +28,7 @@ def build_converto_action(option_number):
     conv = build_converto(option_number)
     file_finder = FileFinder(conv.config.options[option_number], "test")
     conv.files = file_finder._find_files_from_directory(test_path)
+    conv.command_list = conv._generate_command_list()
     return conv
 
 
@@ -48,7 +56,7 @@ def test_generate_menu_options():
     # act
     menu_options = conv._generate_menu_options()
     # assert
-    assert len(menu_options) == 4
+    assert len(menu_options) == 5
 
 
 def test_get_output_filename():
@@ -67,6 +75,15 @@ def test_is_intermediary():
     is_intermediary = conv._is_intermediary(0)
     # assert
     assert is_intermediary == False
+
+
+def test_generate_command_list():
+    # arrange
+    conv = build_converto_action(0)
+    # act
+    command_list = conv._generate_command_list()
+    # assert
+    assert(len(command_list) == 2)
 
 
 def test_convert_basic():
@@ -92,7 +109,7 @@ def test_convert_with_multi_input():
     # assert
     try:
         assert path.exists(output_file_1)
-    except: # since we can't control how the OS discovers files, check both names
+    except:  # since we can't control how the OS discovers files, check both names
         assert path.exists(output_file_2)
     clean_up_all_files()
 
@@ -106,4 +123,20 @@ def test_convert_with_formatting():
     conv.convert()
     # assert
     assert path.exists(output_file)
+    clean_up_all_files()
+
+
+def test_convert_multi_step():
+    # arrange
+    clean_up_all_files()
+    output_file_1 = get_full_output_file_path("flame_roundtrip.avi")
+    output_file_2 = get_full_output_file_path("flame2_roundtrip.avi")
+    conv = build_converto_action(3)
+    # act
+    conv.convert()
+    # assert
+    try:
+        assert path.exists(output_file_1)
+    except:  # since we can't control how the OS discovers files, check both names
+        assert path.exists(output_file_2)
     clean_up_all_files()

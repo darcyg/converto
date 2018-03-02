@@ -42,6 +42,25 @@
       ]
     },
     {
+      "name": "MP4 to AVI to MP4 again",
+      "valid-input-extensions": [
+        "avi"
+      ],
+      "commands": [
+        {
+          "input-options": "",
+          "output-options": "-vcodec h264 -acodec mp2",
+          "output-extension": "mp4"
+        },
+        {
+          "input-options": "",
+          "output-options": "",
+          "output-filename-format": "{input_filename}_roundtrip.{extension}",
+          "output-extension": "avi"
+        }
+      ]
+    },
+    {
       "name": "Rescale Analog NTSC Source",
       "valid-input-extensions": [
         "mkv"

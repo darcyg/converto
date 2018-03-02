@@ -3,6 +3,7 @@ from builtins import input
 from os import path, walk
 from menu import Menu
 
+
 class FileFinder:
     files = list()
     extension_to_find = None
@@ -10,36 +11,29 @@ class FileFinder:
     user_satisfied = False
     satisfied_menu = None
     _user_input = None
-    command_list = None
 
     def __init__(self, option, command_list, user_input=None):
         self.option = option
         self._user_input = user_input
-        self.command_list = command_list
-
 
     def get_user_input(self):
-        while not self.user_satisfied:
-            if self._user_input:
-                user_input = self._user_input
-                self._user_input = None
-            else:
-                user_input = self._ask_user_for_files()
-            user_input = self._clean_user_input(user_input)
-            if path.isfile(user_input):
-                if self._file_is_right_extension(user_input):
-                    self.files.append(user_input)
-            elif path.isdir(user_input):
-                self.files = self._find_files_from_directory(user_input)
-            else:
-                print(
-                    "The path entered: {0} is not valid.\nRetrying...".format(user_input))
-                continue
-            if len(self.files) == 0:
-                print("Selection must contain at least one file of extension types: {0}".format(
-                    self._get_exts_list()))
-                continue
-            self._ask_if_user_is_satisfied_with_files()
+        if self._user_input:
+            user_input = self._user_input
+            self._user_input = None
+        else:
+            user_input = self._ask_user_for_files()
+        user_input = self._clean_user_input(user_input)
+        if path.isfile(user_input):
+            if self._file_is_right_extension(user_input):
+                self.files.append(user_input)
+        elif path.isdir(user_input):
+            self.files = self._find_files_from_directory(user_input)
+        else:
+            print(
+                "The path entered: {0} is not valid.\nRetrying...".format(user_input))
+        if len(self.files) == 0:
+            print("Selection must contain at least one file of extension types: {0}".format(
+                self._get_exts_list()))
         return self.files
 
     def _clean_user_input(self, user_input):
@@ -57,13 +51,20 @@ class FileFinder:
                     found_files.append(path.join(root, f))
         return found_files
 
-    def _ask_if_user_is_satisfied_with_files(self):
+    def _build_menu_title(self, command_list):
+        command_string = ''
+        for ff in command_list:
+            command_string = "{0}{1}\n".format(command_string, ff.ffmpeg_command.cmd)
+
+        return "Commands to be executed:\n\n{0}\n".format(command_string)
+
+    def _ask_if_user_is_satisfied_with_files(self, command_list):
         satisfied = True
-        menu_title = "About to process these files: {0}\nUsing these commands:\n{1}\n\nDoes this look right?".format(
-            self.files, self.command_list)
-        self.satisfied_menu = Menu(title=menu_title)
+        self.satisfied_menu = Menu(
+            title=self._build_menu_title(command_list))
         self.satisfied_menu.set_options([
-            ("Process the files now", lambda: self._handle_user_satisfaction_choice(True)),
+            ("Process these commands now",
+             lambda: self._handle_user_satisfaction_choice(True)),
             ("Add more files", lambda: self._handle_user_satisfaction_choice(False))
         ])
         self.satisfied_menu.open()
