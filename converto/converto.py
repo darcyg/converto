@@ -18,14 +18,19 @@ class Converto:
         self.config = config
         self.input = user_input
 
-    def show_main_menu(self):
+    def choose_ffmpeg_command(self):
         menu_options = self._generate_menu_options()
         self.main_menu = Menu(
             title="Choose which command you would like to run")
         self.main_menu.set_options(menu_options)
         self.main_menu.open()
 
-    def _convert(self):
+    def find_files_to_operate_on(self):
+        file_finder = FileFinder(
+            self.chosen_option, self._generate_command_list(), self.user_input)
+        self.files = file_finder.get_user_input()
+
+    def convert(self):
         for f in self.files:
             for i, command in enumerate(self.chosen_option.commands):
                 input_file, was_intermediate = self._get_file_to_operate_on(
@@ -83,19 +88,14 @@ class Converto:
         menu_options = list()
         for i, opt in enumerate(self.config.options):
             menu_options.append(
-                (opt.name, lambda i=i: self._find_files_and_convert(i)))
+                (opt.name, lambda i=i: self._handle_main_menu_choice(i)))
         return menu_options
 
-    def _find_files_and_convert(self, option_index):
+    def _handle_main_menu_choice(self, option_index):
         self.main_menu.close()
         self.chosen_option = self.config.options[option_index]
-        print("You chose \"{0}\"\n".format(self.chosen_option.name))
-        file_finder = FileFinder(self.chosen_option, self.user_input)
-        file_finder.get_user_input()
-        self.files = file_finder.files
-        self._ask_if_commands_look_right()
 
-    def _ask_if_commands_look_right(self):
+    def _generate_command_list(self):
         command_list = ""
         for command in self.chosen_option.commands:
             ff = FFmpeg(
@@ -103,19 +103,4 @@ class Converto:
                 outputs={"{output_filename}": command.output_options}
             )
             command_list = command_list + ff.cmd + "\n"
-        menu_title = "About to process these files: {0}\nUsing these commands:\n{1}\n\nDoes this look right?".format(
-            self.files, command_list)
-        self.satisfied_menu = Menu(title=menu_title)
-        self.satisfied_menu.set_options([
-            ("Yes, process the files now",
-             lambda: self._handle_user_satisfaction_choice(True)),
-            ("No, cancel", lambda: self._handle_user_satisfaction_choice(False)),
-        ])
-        self.satisfied_menu.open()
-
-    def _handle_user_satisfaction_choice(self, satisified):
-        self.satisfied_menu.close()
-        if satisified:
-            self._convert()
-        else:
-            exit(0)
+        return command_list

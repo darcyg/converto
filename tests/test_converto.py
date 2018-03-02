@@ -75,7 +75,7 @@ def test_convert_basic():
     output_file = get_full_output_file_path("flame.mp4")
     conv = build_converto_action(0)
     # act
-    conv._convert()
+    conv.convert()
     # assert
     assert path.exists(output_file)
     clean_up_all_files()
@@ -88,7 +88,7 @@ def test_convert_with_multi_input():
     output_file_2 = get_full_output_file_path("flame2.mp4")
     conv = build_converto_action(1)
     # act
-    conv._convert()
+    conv.convert()
     # assert
     try:
         assert path.exists(output_file_1)
@@ -103,7 +103,7 @@ def test_convert_with_formatting():
     output_file = get_full_output_file_path("flame_ac.mp4")
     conv = build_converto_action(2)
     # act
-    conv._convert()
+    conv.convert()
     # assert
     assert path.exists(output_file)
     clean_up_all_files()

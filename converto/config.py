@@ -1,5 +1,6 @@
 import json
 from os import path, getcwd
+import logging
 
 
 class Configuration:
@@ -9,6 +10,7 @@ class Configuration:
     def __init__(self, config_file_path=None):
         self._find_config(config_file_path)
         self._parse_options()
+        logging.debug(self)
 
     def __repr__(self):
         return "Config File: {0}\nOptions: {1}".format(self.config_file_path, self.options)

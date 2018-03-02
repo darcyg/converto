@@ -3,7 +3,6 @@ from builtins import input
 from os import path, walk
 from menu import Menu
 
-
 class FileFinder:
     files = list()
     extension_to_find = None
@@ -11,10 +10,13 @@ class FileFinder:
     user_satisfied = False
     satisfied_menu = None
     _user_input = None
+    command_list = None
 
-    def __init__(self, option, user_input=None):
+    def __init__(self, option, command_list, user_input=None):
         self.option = option
         self._user_input = user_input
+        self.command_list = command_list
+
 
     def get_user_input(self):
         while not self.user_satisfied:
@@ -38,6 +40,7 @@ class FileFinder:
                     self._get_exts_list()))
                 continue
             self._ask_if_user_is_satisfied_with_files()
+        return self.files
 
     def _clean_user_input(self, user_input):
         return user_input.replace(r"\ ", " ")
@@ -56,23 +59,17 @@ class FileFinder:
 
     def _ask_if_user_is_satisfied_with_files(self):
         satisfied = True
-        self.satisfied_menu = Menu(
-            title="Files to Process:\n{0}\nDoes this look right?".format(self._get_file_list()))
+        menu_title = "About to process these files: {0}\nUsing these commands:\n{1}\n\nDoes this look right?".format(
+            self.files, self.command_list)
+        self.satisfied_menu = Menu(title=menu_title)
         self.satisfied_menu.set_options([
-            ("Yes, continue", lambda: self._handle_user_satisfaction_choice(True)),
-            ("No, let me try again.",
-             lambda: self._handle_user_satisfaction_choice(False)),
-            ("Add another file.", lambda: self._handle_user_satisfaction_choice(
-                True, add_another=True)),
+            ("Process the files now", lambda: self._handle_user_satisfaction_choice(True)),
+            ("Add more files", lambda: self._handle_user_satisfaction_choice(False))
         ])
         self.satisfied_menu.open()
 
-    def _handle_user_satisfaction_choice(self, satisfied, add_another=False):
+    def _handle_user_satisfaction_choice(self, satisfied):
         self.satisfied_menu.close()
-        if add_another:
-            return
-        if not satisfied:
-            self.files = list()
         self.user_satisfied = satisfied
 
     def _get_file_list(self):

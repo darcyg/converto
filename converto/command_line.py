@@ -10,9 +10,10 @@ def main():
     args = parse_args()
     setup_logging(args.debug)
     configuration = Configuration(args.config)
-    logging.debug(configuration)
     converto = Converto(configuration, args.input)
-    converto.show_main_menu()
+    converto.choose_ffmpeg_command()
+    converto.find_files_to_operate_on()
+    converto.convert()
 
 
 def parse_args():
