@@ -54,7 +54,8 @@ class FileFinder:
     def _build_menu_title(self, command_list):
         command_string = ''
         for ff in command_list:
-            command_string = "{0}{1}\n".format(command_string, ff.ffmpeg_command.cmd)
+            command_string = "{0}{1}\n".format(
+                command_string, ff.ffmpeg_command.cmd)
 
         return "Commands to be executed:\n\n{0}\n".format(command_string)
 
@@ -86,4 +87,7 @@ class FileFinder:
         return extension_list_string[:-2]
 
     def _file_is_right_extension(self, file_path):
-        return file_path.endswith(tuple(self.option.valid_input_exts))
+        if "*" in self.option.valid_input_exts:
+            return True
+        else:
+            return file_path.endswith(tuple(self.option.valid_input_exts))

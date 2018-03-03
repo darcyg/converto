@@ -42,7 +42,7 @@
       ]
     },
     {
-      "name": "MP4 to AVI to MP4 again",
+      "name": "AVI to MP4 to AVI again",
       "valid-input-extensions": [
         "avi"
       ],
@@ -57,6 +57,19 @@
           "output-options": "",
           "output-filename-format": "{input_filename}_roundtrip.{extension}",
           "output-extension": "avi"
+        }
+      ]
+    },
+    {
+      "name": "Anything to MP4",
+      "valid-input-extensions": [
+        "*"
+      ],
+      "commands": [
+        {
+          "input-options": "",
+          "output-options": "-vcodec h264 -acodec mp2",
+          "output-extension": "mp4"
         }
       ]
     },

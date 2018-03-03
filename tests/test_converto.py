@@ -56,7 +56,7 @@ def test_generate_menu_options():
     # act
     menu_options = conv._generate_menu_options()
     # assert
-    assert len(menu_options) == 5
+    assert len(menu_options) == 6
 
 
 def test_get_output_filename():
@@ -139,4 +139,18 @@ def test_convert_multi_step():
         assert path.exists(output_file_1)
     except:  # since we can't control how the OS discovers files, check both names
         assert path.exists(output_file_2)
+    clean_up_all_files()
+
+
+def test_convert_with_wildcard():
+    # arrange
+    clean_up_all_files()
+    output_file = get_full_output_file_path("flame.avi")
+    conv = build_converto_action(4)
+    conv.files = [output_file]
+    conv.command_list = conv._generate_command_list()
+    # act
+    conv.convert()
+    # assert
+    assert path.exists(output_file)
     clean_up_all_files()
