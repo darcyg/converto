@@ -1,5 +1,6 @@
 from __future__ import print_function
 from .file_finder import FileFinder
+from .menus import create_choose_ffmpeg_command_menu
 from menu import Menu
 from ffmpy import FFmpeg
 from os import path, remove, rename
@@ -14,7 +15,6 @@ class Command:
 
 
 class Converto:
-    menu_options = list()
     files = list()
     config = None
     main_menu = None
@@ -27,10 +27,7 @@ class Converto:
         self.input = user_input
 
     def choose_ffmpeg_command(self):
-        menu_options = self._generate_menu_options()
-        self.main_menu = Menu(
-            title="Choose which command you would like to run")
-        self.main_menu.set_options(menu_options)
+        self.main_menu = create_choose_ffmpeg_command_menu(self._generate_menu_options())
         self.main_menu.open()
 
     def find_files_to_operate_on(self):

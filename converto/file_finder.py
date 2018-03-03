@@ -2,6 +2,7 @@ from __future__ import print_function
 from builtins import input
 from os import path, walk
 from menu import Menu
+from .menus import ask_user_for_files
 
 
 class FileFinder:
@@ -21,7 +22,7 @@ class FileFinder:
             user_input = self._user_input
             self._user_input = None
         else:
-            user_input = self._ask_user_for_files()
+            user_input = ask_user_for_files(self._get_exts_list())
         user_input = self._clean_user_input(user_input)
         if path.isfile(user_input):
             if self._file_is_right_extension(user_input):
@@ -38,10 +39,6 @@ class FileFinder:
 
     def _clean_user_input(self, user_input):
         return user_input.replace(r"\ ", " ")
-
-    def _ask_user_for_files(self):
-        print("Valid input types: {0}\n".format(self._get_exts_list()))
-        return input("Enter the path of your file or directory of files: ").strip()
 
     def _find_files_from_directory(self, user_input):
         found_files = list()
