@@ -1,10 +1,11 @@
 # Converto 
 [![Build Status](https://travis-ci.org/erikmhauck/converto.svg?branch=master)](https://travis-ci.org/erikmhauck/converto)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Coverage Status](https://coveralls.io/repos/github/erikmhauck/converto/badge.svg?branch=master)](https://coveralls.io/github/erikmhauck/converto?branch=master)
 
 [![Python Versions](https://img.shields.io/pypi/pyversions/Converto.svg)](https://pypi.python.org/pypi/Converto)
 [![PyPI Version](https://img.shields.io/pypi/v/Converto.svg)](https://pypi.python.org/pypi/Converto)
+
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 ## Summary
 
